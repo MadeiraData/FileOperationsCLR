@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>RunBCP</Name>
+    <Name>FileOperationsCLR</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{9ae2aec3-d8b7-4f19-924e-828397df3f6b}</ProjectGuid>
@@ -11,8 +11,8 @@
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>RunBCP</RootNamespace>
-    <AssemblyName>RunBCP</AssemblyName>
+    <RootNamespace>FileOperationsCLR</RootNamespace>
+    <AssemblyName>FileOperationsCLR</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
@@ -23,7 +23,7 @@
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
     <SignAssembly>True</SignAssembly>
-    <AssemblyOriginatorKeyFile>RunBCP_key.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>FileOperationsCLR_key.pfx</AssemblyOriginatorKeyFile>
     <PermissionSet>UNSAFE</PermissionSet>
     <GenerateCreateScript>True</GenerateCreateScript>
   </PropertyGroup>
@@ -66,12 +66,30 @@
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RunBCP.cs" />
+    <Compile Include="FileOperations.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="RunBCP_key.pfx" />
     <None Include="ImportCLRKey.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="FileOperationsCLR_key.pfx" />
+    <None Include="FileOperationsCLR.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PreDeploy Include="Script.PreDeployment.CLR_Signing.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <SqlCmdVariable Include="CLRKeyName">
+      <DefaultValue>FileOperationsCLRKey</DefaultValue>
+      <Value>$(SqlCmdVar__2)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="CLRLoginName">
+      <DefaultValue>FileOperationsCLRLogin</DefaultValue>
+      <Value>$(SqlCmdVar__3)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="PathToSignedDLL">
+      <DefaultValue>C:\temp\FileOperationsCLR.dll</DefaultValue>
+      <Value>$(SqlCmdVar__1)</Value>
+    </SqlCmdVariable>
   </ItemGroup>
 </Project>

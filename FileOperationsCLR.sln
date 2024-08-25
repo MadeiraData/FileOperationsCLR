@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "RunBCP", "RunBCP.sqlproj", "{9AE2AEC3-D8B7-4F19-924E-828397DF3F6B}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "FileOperationsCLR", "FileOperationsCLR.sqlproj", "{9AE2AEC3-D8B7-4F19-924E-828397DF3F6B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
