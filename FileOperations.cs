@@ -68,8 +68,8 @@ public partial class StoredProcedures
 
     USE [test]
     GO
-    DECLARE @sourcePath nvarchar(max) = '\\ALMOGERP\masav\FileToMove.txt'
-    DECLARE @targetPath nvarchar(max) = '\\sql-srv\FromPeleCard'
+    DECLARE @sourcePath nvarchar(max) = 'C:\IncomingData\FileToMove.txt'
+    DECLARE @targetPath nvarchar(max) = 'C:\OutgoingData'
     DECLARE @overwrite bit = 1
     DECLARE @output_msg nvarchar(max)
     DECLARE @error_msg nvarchar(max)
@@ -97,26 +97,34 @@ public partial class StoredProcedures
         error_msg = string.Empty;
 
         string[] allowedPaths = new string[] {
-              "\\\\ALMOGERP\\masav"
-            , "\\\\sql-srv\\FromPeleCard"
-            , "\\\\Almogerp\\AlmogErp\\5783548_gib\\gib_from_pel"
-            , "\\\\Almogerp\\AlmogErp\\masav_gib\\from_masav"
-            , "\\\\Almogerp\\5783548"
-            , "\\\\Almogerp\\5783548016"
+            /*
+             ** Add allowed paths here **
+             * Example:
+             @"\\FileSrv\SharedPath\", @"\\sql-srv\IncomingData\", @"C:\IncomingData\", @"C:\OutgoingData\"
+             * Leave empty to allow all folder paths
+            */
         };
 
         bool sourceOkay = false;
         bool targetOkay = false;
 
-        foreach (var allowedPath in allowedPaths)
+        if (allowedPaths.Length == 0)
         {
-            if (sourcePath.Value.StartsWith(allowedPath))
+            sourceOkay = true;
+            targetOkay = true;
+        }
+        else
+        {
+            foreach (var allowedPath in allowedPaths)
             {
-                sourceOkay = true;
-            }
-            if (targetPath.Value.StartsWith(allowedPath))
-            {
-                targetOkay = true;
+                if (sourcePath.Value.StartsWith(allowedPath))
+                {
+                    sourceOkay = true;
+                }
+                if (targetPath.Value.StartsWith(allowedPath))
+                {
+                    targetOkay = true;
+                }
             }
         }
 
